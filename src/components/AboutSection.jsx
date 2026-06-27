@@ -1,4 +1,5 @@
 import { SectionHeading } from './SectionHeading';
+import { FadeIn } from './FadeIn';
 
 export function AboutSection({ t }) {
   const a = t.about;
@@ -8,15 +9,18 @@ export function AboutSection({ t }) {
       id="about-me"
       style={{ borderTop: '0.943px solid var(--border-default)', padding: 'var(--v-pad) var(--page-gutter)' }}
     >
-      <SectionHeading number={a.number} title={a.title} />
-      <p style={{
-        fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--text-secondary)',
-        marginBottom: 48, maxWidth: 520, marginTop: -8,
-      }}>{a.sub}</p>
+      {/* Heading drops in from above */}
+      <FadeIn y={-24}>
+        <SectionHeading number={a.number} title={a.title} />
+        <p style={{
+          fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--text-secondary)',
+          marginBottom: 48, maxWidth: 520, marginTop: -8,
+        }}>{a.sub}</p>
+      </FadeIn>
 
       <div className="about-grid">
-        {/* Left: bio + skills + goals */}
-        <div>
+        {/* Left col slides in from the left */}
+        <FadeIn x={-32} y={0} delay={0.1}>
           <div style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'clamp(22px, 3vw, 38px)' }}>
             {a.name}
           </div>
@@ -83,52 +87,56 @@ export function AboutSection({ t }) {
               ))}
             </ul>
           </div>
-        </div>
+        </FadeIn>
 
-        {/* Right: education + certs */}
+        {/* Right col slides in from the right */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          <div style={{
-            background: '#FFFFFF', border: '1px solid var(--border-default)',
-            borderRadius: 10, padding: 28,
-          }}>
+          <FadeIn x={32} y={0} delay={0.15}>
             <div style={{
-              fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-link)',
-              letterSpacing: '.06em', marginBottom: 8,
-            }}>{a.educationTag}</div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 600 }}>
-              {a.educationSchool}
+              background: '#FFFFFF', border: '1px solid var(--border-default)',
+              borderRadius: 10, padding: 28,
+            }}>
+              <div style={{
+                fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-link)',
+                letterSpacing: '.06em', marginBottom: 8,
+              }}>{a.educationTag}</div>
+              <div style={{ fontFamily: 'var(--font-display)', fontSize: 22, fontWeight: 600 }}>
+                {a.educationSchool}
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 6 }}>
+                {a.educationMajor}
+              </div>
+              <div style={{ fontSize: 14, marginTop: 14 }}>
+                {a.educationGpaLabel} <strong>{a.educationGpa}</strong> / 4.0
+              </div>
+              <div style={{ fontSize: 12.5, color: 'var(--text-secondary)', marginTop: 6 }}>
+                {a.educationStrength}
+              </div>
             </div>
-            <div style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 6 }}>
-              {a.educationMajor}
-            </div>
-            <div style={{ fontSize: 14, marginTop: 14 }}>
-              {a.educationGpaLabel} <strong>{a.educationGpa}</strong> / 4.0
-            </div>
-            <div style={{ fontSize: 12.5, color: 'var(--text-secondary)', marginTop: 6 }}>
-              {a.educationStrength}
-            </div>
-          </div>
+          </FadeIn>
 
-          <div style={{
-            background: '#FFFFFF', border: '1px solid var(--border-default)',
-            borderRadius: 10, padding: 28,
-          }}>
+          <FadeIn x={32} y={0} delay={0.28}>
             <div style={{
-              fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-secondary)',
-              textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: 12,
-            }}>{a.certsLabel}</div>
-            <ul style={{ listStyle: 'none' }}>
-              {a.certs.map((c, i) => (
-                <li key={i} style={{
-                  fontSize: 13.5, color: 'var(--text-secondary)', paddingLeft: 16,
-                  position: 'relative', marginBottom: 8, lineHeight: 1.5,
-                }}>
-                  <span style={{ position: 'absolute', left: 0, color: 'var(--text-accent)' }}>~</span>
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </div>
+              background: '#FFFFFF', border: '1px solid var(--border-default)',
+              borderRadius: 10, padding: 28,
+            }}>
+              <div style={{
+                fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-secondary)',
+                textTransform: 'uppercase', letterSpacing: '.08em', marginBottom: 12,
+              }}>{a.certsLabel}</div>
+              <ul style={{ listStyle: 'none' }}>
+                {a.certs.map((c, i) => (
+                  <li key={i} style={{
+                    fontSize: 13.5, color: 'var(--text-secondary)', paddingLeft: 16,
+                    position: 'relative', marginBottom: 8, lineHeight: 1.5,
+                  }}>
+                    <span style={{ position: 'absolute', left: 0, color: 'var(--text-accent)' }}>~</span>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeIn>
         </div>
       </div>
     </section>

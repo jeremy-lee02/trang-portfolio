@@ -1,4 +1,5 @@
 import { SectionHeading } from './SectionHeading';
+import { FadeIn } from './FadeIn';
 
 export function ContactSection({ t }) {
   const c = t.contact;
@@ -7,9 +8,12 @@ export function ContactSection({ t }) {
       id="contact"
       style={{ borderTop: '0.943px solid var(--border-default)', padding: 'var(--v-pad-sm) var(--page-gutter) var(--v-pad)' }}
     >
-      <SectionHeading number={c.number} title={c.title} />
+      <FadeIn y={-20}>
+        <SectionHeading number={c.number} title={c.title} />
+      </FadeIn>
 
-      <div className="reveal-item" style={{
+      {/* Big dramatic lift for the CTA */}
+      <FadeIn y={56} delay={0.1} style={{
         fontFamily: 'var(--font-display)', fontWeight: 600,
         fontSize: 'clamp(40px, 7vw, 84px)', lineHeight: 1.05, maxWidth: 760,
         marginBottom: 56, color: 'var(--text-primary)',
@@ -20,11 +24,12 @@ export function ContactSection({ t }) {
             {i < c.ctaLines.length - 1 && <br />}
           </span>
         ))}
-      </div>
+      </FadeIn>
 
-      <div
-        className="reveal-item"
-        style={{ transitionDelay: '.12s', display: 'flex', gap: 44, flexWrap: 'wrap', alignItems: 'center' }}
+      <FadeIn
+        y={32}
+        delay={0.22}
+        style={{ display: 'flex', gap: 44, flexWrap: 'wrap', alignItems: 'center' }}
       >
         <a
           href={c.gmailUrl}
@@ -81,7 +86,7 @@ export function ContactSection({ t }) {
         <span style={{
           fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-secondary)',
         }}>{c.location}</span>
-      </div>
+      </FadeIn>
     </section>
   );
 }

@@ -1,4 +1,11 @@
+import { motion } from 'motion/react';
 import { Eyebrow } from './Eyebrow';
+
+const up = (delay) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: 'easeInOut', delay },
+});
 
 export function HeroSection({ t }) {
   const h = t.hero;
@@ -12,14 +19,19 @@ export function HeroSection({ t }) {
         position: 'relative', overflow: 'hidden',
       }}
     >
-      <Eyebrow>{h.eyebrow}</Eyebrow>
+      <motion.div {...up(0.05)}>
+        <Eyebrow>{h.eyebrow}</Eyebrow>
+      </motion.div>
 
-      <h1 style={{
-        fontFamily: 'var(--font-display)', fontWeight: 600,
-        fontSize: 'clamp(36px, 9vw, 128px)', lineHeight: .95,
-        letterSpacing: '-.02em',
-        marginTop: 18, marginBottom: 28, color: 'var(--text-primary)', maxWidth: 1000,
-      }}>
+      <motion.h1
+        {...up(0.15)}
+        style={{
+          fontFamily: 'var(--font-display)', fontWeight: 600,
+          fontSize: 'clamp(36px, 9vw, 128px)', lineHeight: .95,
+          letterSpacing: '-.02em',
+          marginTop: 18, marginBottom: 28, color: 'var(--text-primary)', maxWidth: 1000,
+        }}
+      >
         {h.titleLines.map((line, i) => (
           <span key={i}>
             {i === h.titleLines.length - 1
@@ -28,17 +40,23 @@ export function HeroSection({ t }) {
             {i < h.titleLines.length - 1 && <br />}
           </span>
         ))}
-      </h1>
+      </motion.h1>
 
-      <p style={{
-        fontFamily: 'var(--font-body)', fontSize: 'clamp(15px, 4vw, 18px)',
-        color: 'var(--text-secondary)',
-        maxWidth: 560, lineHeight: 1.6, marginBottom: 48,
-      }}>
+      <motion.p
+        {...up(0.25)}
+        style={{
+          fontFamily: 'var(--font-body)', fontSize: 'clamp(15px, 4vw, 18px)',
+          color: 'var(--text-secondary)',
+          maxWidth: 560, lineHeight: 1.6, marginBottom: 48,
+        }}
+      >
         {h.sub}
-      </p>
+      </motion.p>
 
-      <div style={{ display: 'flex', gap: 'clamp(20px, 5vw, 48px)', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+      <motion.div
+        {...up(0.35)}
+        style={{ display: 'flex', gap: 'clamp(20px, 5vw, 48px)', flexWrap: 'wrap', alignItems: 'flex-start' }}
+      >
         {h.meta.map(m => (
           <div key={m.label}>
             <div style={{
@@ -51,7 +69,7 @@ export function HeroSection({ t }) {
             }}>{m.value}</strong>
           </div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
